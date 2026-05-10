@@ -1,0 +1,22 @@
+---
+---
+
+
+<footer class="bg-darker py-10 border-t border-gray-800 text-center text-gray-500">
+    <div class="space-x-4 mb-4">
+        <a href="/terms" class="hover:text-brand transition">Terms of Service</a>
+        <a href="/privacy" class="hover:text-brand transition">Privacy Policy</a>
+    </div>
+    <p class="mb-2">&copy; <span id="year">2024</span> Barepics. All rights reserved.</p>
+    <p class="text-sm">
+        By downloading the app or using this site, you agree to our Terms of Service and Privacy
+        Policy.
+    </p>
+</footer>
+
+<script>
+	const yearElement = document.getElementById('year');
+	if (yearElement) {
+		yearElement.textContent = new Date().getFullYear().toString()
+	}
+</script>

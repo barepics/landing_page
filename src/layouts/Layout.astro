@@ -1,3 +1,14 @@
+---
+import Footer from '../components/footer.astro';
+import Nav from '../components/nav.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,12 +17,94 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="exoclick-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
+		<title>{title}</title>
+		<style>
+			body {
+				font-family:
+					-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+			}
+			/* Smooth scrolling */
+			html {
+				color-scheme: dark;
+				scroll-behavior: smooth;
+			}
+			/* Modal Blur */
+			.modal-blur {
+				-webkit-backdrop-filter: blur(10px);
+				backdrop-filter: blur(10px);
+			}
+		</style>
 	</head>
-	<body>
+	<body class="bg-darker text-white antialiased overflow-hidden" id="body">
+		
+		<div
+			id="age-modal"
+			class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 modal-blur transition-opacity duration-300"
+		>
+			<div
+				class="bg-dark p-8 rounded-2xl max-w-md w-[90%] text-center border border-gray-800 shadow-2xl"
+			>
+				<h2 class="text-3xl font-bold text-brand mb-4">18+ Only</h2>
+				<p class="text-gray-400 mb-8">
+					This application contains adult content. You must be at least 18 years old to enter and
+					download.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<button
+						id="leave-site-btn"
+						class="px-6 py-3 rounded-lg font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition"
+					>
+						I am under 18
+					</button>
+					<button
+						id="enter-site-btn"
+						class="px-6 py-3 rounded-lg font-semibold bg-brand text-white hover:bg-rose-700 transition shadow-[0_0_15px_rgba(225,29,72,0.5)]"
+					>
+						I am 18 or older
+					</button>
+				</div>
+			</div>
+		</div>
+		<Nav />
 		<slot />
+		<Footer />
 	</body>
 </html>
+
+<script>
+	const ageModal = document.getElementById('age-modal') as HTMLElement;
+	const body = document.getElementById('body') as HTMLElement;
+	const leaveSiteBtn = document.getElementById('leave-site-btn') as HTMLButtonElement;
+	const enterSiteBtn = document.getElementById('enter-site-btn') as HTMLButtonElement;
+
+	leaveSiteBtn.addEventListener('click', leaveSite)
+	enterSiteBtn.addEventListener('click', enterSite)
+
+
+	// Check if user already verified age
+	window.onload = function () {
+		if (localStorage.getItem('ageVerified') === 'true') {
+			ageModal.style.display = 'none'
+			body.classList.remove('overflow-hidden')
+		}
+	}
+
+	function enterSite() {
+		localStorage.setItem('ageVerified', 'true')
+		const modal = ageModal
+		modal.style.opacity = '0'
+		setTimeout(() => {
+			modal.style.display = 'none'
+			body.classList.remove('overflow-hidden')
+		}, 300) // Wait for fade out
+	}
+
+	function leaveSite() {
+		window.location.href = 'https://www.google.com'
+	}
+</script>
+
 
 <style>
 	html,
