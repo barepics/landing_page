@@ -135,6 +135,8 @@ import barepicsGalleries from "../assets/images/barepics_galleries.jpg";
 
 
 <script>
+	import { track } from '@vercel/analytics';
+ 
 	const previews = document.querySelectorAll('.preview');
 
 	function togglePreviews() {
@@ -181,6 +183,10 @@ import barepicsGalleries from "../assets/images/barepics_galleries.jpg";
 
 		// Update the button's href to the correct path
 		downloadBtn.href = apkPath;
+		downloadBtn.download = "barepics-apk.apk";
+		downloadBtn.addEventListener('click', () => {
+			track('DownloadEvent', {apkPath}, { flags: ['summer-sale'] });
+		});
 	}
 
 	// Run when the DOM is ready
