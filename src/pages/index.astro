@@ -26,7 +26,7 @@ import barepicsGalleries from "../assets/images/barepics_galleries.jpg";
 				<div class="flex flex-col sm:flex-row items-center gap-4" id="download">
 					<a
 						id="main-download-btn" 
-						href="https://xcess.lazaroosee.xyz/downloads/app-release.apk"
+						href="https://apks.lazaroosee.xyz/barepics/app-release.apk"
 						download="barepics-apk.apk"
 						class="w-full sm:w-auto px-8 py-4 text-lg font-bold rounded-full bg-brand hover:bg-rose-700 transition flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(225,29,72,0.4)]"
 					>
@@ -149,7 +149,7 @@ import barepicsGalleries from "../assets/images/barepics_galleries.jpg";
 	async function setOptimizedDownloadLink() {
 		const downloadBtn = document.getElementById('main-download-btn') as HTMLAnchorElement;
 		// Default to the universal APK
-		let apkPath = "https://xcess.lazaroosee.xyz/downloads/app-release.apk";
+		let apkPath = "https://apks.lazaroosee.xyz/barepics/app-release.apk";
 
 		// @ts-ignore
 		if (navigator.userAgentData) {
@@ -161,20 +161,20 @@ import barepicsGalleries from "../assets/images/barepics_galleries.jpg";
 
 			if(hints.mobile) {
 				if (hints.platform.toLowerCase() === 'android') {
-					apkPath = "https://xcess.lazaroosee.xyz/downloads/app-arm64-v8a-release.apk";
+					apkPath = "https://apks.lazaroosee.xyz/barepics/app-arm64-v8a-release.apk";
 				}  else {
-					apkPath = "https://xcess.lazaroosee.xyz/downloads/app-armeabi-v7a-release.apk";
+					apkPath = "https://apks.lazaroosee.xyz/barepics/app-armeabi-v7a-release.apk";
 				}
 			}
 			
 			if (hints.architecture === 'arm') {
 				if (hints.bitness === '64') {
-					apkPath = "https://xcess.lazaroosee.xyz/downloads/app-arm64-v8a-release.apk";
+					apkPath = "https://apks.lazaroosee.xyz/barepics/app-arm64-v8a-release.apk";
 				} else {
-					apkPath = "https://xcess.lazaroosee.xyz/downloads/app-armeabi-v7a-release.apk";
+					apkPath = "https://apks.lazaroosee.xyz/barepics/app-armeabi-v7a-release.apk";
 				}
 			} else if (hints.architecture === 'x86' && hints.bitness === '64') {
-				apkPath = "https://xcess.lazaroosee.xyz/downloads/app-x86_64-release.apk";
+				apkPath = "https://apks.lazaroosee.xyz/barepics/app-x86_64-release.apk";
 			}
 			} catch (error) {
 				console.log("Could not detect architecture, defaulting to universal.");
